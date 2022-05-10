@@ -1,16 +1,23 @@
 <?php
 
-require '../Core/Router.php';
-
-require '../App/Controllers/Home.php';
-require '../App/Controllers/Posts.php';
+spl_autoload_register(function ($class) {
+    $root = dirname(__DIR__);
+    $file = $root . '/' . str_replace('\\', '/', $class) . '.php';
+    if (is_readable($file)) {
+        require $file;
+    }
+});
 
 $path = trim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/');
 
-$router = new Router();
+$router = new Core\Router();
 
 $router->add('', ['controller' => 'Home', 'action' => 'index']);
 $router->add('{controller}/{action}');
 $router->add('{controller}/{action}/{\d+}');
+
+// admin section
+$router->add('admin/{controller}/{action}', ['namespace' => 'admin']);
+$router->add('admin/{controller}/{action}/{\d+}', ['namespace' => 'admin']);
 
 $router->dispatch($path);

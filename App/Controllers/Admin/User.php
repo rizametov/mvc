@@ -1,15 +1,15 @@
 <?php declare(strict_types=1);
 
-namespace App\Controllers;
+namespace App\Controllers\Admin;
 
-class Posts extends \Core\Controller    
+class User extends \Core\Controller
 {
     public function indexAction()
     {
-        echo 'Posts controller, action index';
+        echo htmlentities(print_r($this->routeParams, true));
     }
 
-    public function edit()
+    public function editAction()
     {
         echo htmlentities(print_r($this->routeParams, true));
     }
