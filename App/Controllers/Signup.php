@@ -5,10 +5,10 @@ namespace App\Controllers;
 use Core\View;
 use Core\Controller;
 
-class Home extends Controller
+class Signup extends Controller
 {
-    public function indexAction()
+    public function newAction()
     {
-        View::render('Home/index.php');
+        View::render('Signup/new.php');
     }
 }

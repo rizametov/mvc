@@ -2,7 +2,7 @@
 
 namespace Core;
 
-use config\Config;
+use App\Config;
 use Core\View;
 
 class Error

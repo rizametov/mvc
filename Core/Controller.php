@@ -20,7 +20,7 @@ abstract class Controller
         }
     }
 
-    protected function before(){}
+    protected function before() {}
 
-    protected function after(){}
+    protected function after() {}
 }

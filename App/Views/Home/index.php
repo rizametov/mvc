@@ -1,10 +1,16 @@
-<?php require dirname(__DIR__) . '/templates/header.php'; ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+</head>
+<body>
 
-    <?php echo htmlentities($name) ?>
-    <hr>
+<h1>Welcome</h1>
 
-    <?php foreach ($colors as $color): ?>
-        <li><?php echo htmlentities($color); ?></li>
-    <?php endforeach; ?>
-
-<?php require dirname(__DIR__) . '/templates/footer.php'; ?>
+<a href="/signup/new">Sign Up</a>
+    
+</body>
+</html>
