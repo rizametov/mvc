@@ -6,12 +6,12 @@ class User extends \Core\Controller
 {
     public function indexAction()
     {
-        echo htmlentities(print_r($this->routeParams, true));
+        echo '<pre>' . htmlentities(print_r($this->routeParams, true));
     }
 
     public function editAction()
     {
-        echo htmlentities(print_r($this->routeParams, true));
+        echo '<pre>' . htmlentities(print_r($this->routeParams, true));
     }
 
     protected function before()

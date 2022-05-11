@@ -2,25 +2,21 @@
 
 namespace App\Controllers;
 
-class Posts extends \Core\Controller    
+use App\Models\Post;
+use Core\View;
+use Core\Controller;
+
+class Posts extends Controller    
 {
     public function indexAction()
     {
-        echo 'Posts controller, action index';
+        $posts = Post::all();
+
+        View::render('Posts/index.php', ['posts' => $posts]);
     }
 
     public function edit()
     {
         echo htmlentities(print_r($this->routeParams, true));
-    }
-
-    protected function before()
-    {
-        echo '(before)';
-    }
-
-    protected function after()
-    {
-        echo '(after)';
     }
 }

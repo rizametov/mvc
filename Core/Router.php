@@ -48,13 +48,13 @@ class Router
                     $controllerObject->$action();
 
                 } else {
-                    echo sprintf('action %s cannot be called', $action);
+                    throw new \Exception("Action $action not found in controller $controller");
                 }
             } else {
-                echo sprintf('class %s not found', $controller);
+                throw new \Exception("Controller $controller not found");
             }
         } else {
-            echo sprintf('route %s is incorrect, 404', $path);
+            throw new \Exception("No route matched", 404);
         }
     }
 

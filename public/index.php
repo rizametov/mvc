@@ -8,6 +8,10 @@ spl_autoload_register(function ($class) {
     }
 });
 
+error_reporting(E_ALL);
+set_error_handler('Core\Error::errorHandler');
+set_exception_handler('Core\Error::exceptionHandler');
+
 $path = trim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/');
 
 $router = new Core\Router();
