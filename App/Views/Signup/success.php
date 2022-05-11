@@ -4,13 +4,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
+    <title>Success</title>
 </head>
 <body>
-
-<a href="/signup/new">Sign Up</a>
-
-<h1>Welcome</h1>
-
+    <h2>User was successfully created</h2>
 </body>
 </html>

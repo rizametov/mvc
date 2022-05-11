@@ -20,6 +20,13 @@ abstract class Controller
         }
     }
 
+    protected function redirect(string $url): void
+    {
+        header('Location: http://' . $_SERVER['HTTP_HOST'] . $url, true, 303);
+        
+        exit;
+    }
+
     protected function before() {}
 
     protected function after() {}
