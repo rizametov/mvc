@@ -7,7 +7,7 @@ use Core\Controller;
 
 class Home extends Controller
 {
-    public function indexAction()
+    public function indexAction(): void
     {
         View::render('Home/index.php');
     }

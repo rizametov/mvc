@@ -3,12 +3,13 @@
 namespace App\Models;
 
 use \PDO;
+use Core\Model;
 
-class User extends \Core\Model
+class User extends Model
 {
     private array $errors = [];
 
-    public function __construct(array $data)
+    public function __construct(array $data = [])
     {
         foreach ($data as $key => $value) {
             $this->$key = $value;
@@ -86,9 +87,14 @@ class User extends \Core\Model
         return empty($this->errors);
     }
 
-    private function emailExists(string $email): bool
+    public static function emailExists(string $email): bool
     {
-        $sql = 'SELECT email FROM users WHERE email = :email';
+        return false !== static::getByEmail($email);
+    }
+
+    public static function getByEmail(string $email): User|bool
+    {
+        $sql = 'SELECT * FROM users WHERE email = :email';
 
         $db = static::getDB();
 
@@ -96,8 +102,23 @@ class User extends \Core\Model
 
         $stmt->bindValue(':email', $email, PDO::PARAM_STR);
 
+        $stmt->setFetchMode(PDO::FETCH_CLASS, get_called_class());
+
         $stmt->execute();
 
-        return false !== $stmt->fetch(); 
+        return $stmt->fetch();
     }
+
+    public static function authenticate(string $email, string $password): User|bool
+    {
+        $user = static::getByEmail($email);
+
+        if (false !== $user) {
+            if (password_verify($password, $user->password_hash)) {
+                return $user;
+            }
+        }
+
+        return false;
+    } 
 }

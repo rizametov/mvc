@@ -8,7 +8,11 @@
 </head>
 <body>
 
-<a href="/signup/new">Sign Up</a>
+<div><a href="/signup/index">Sign Up</a></div>
+<hr>
+<div><a href="/login/index">Log In</a></div>
+
+<hr>
 
 <h1>Welcome</h1>
 

@@ -8,23 +8,23 @@ use App\Models\User;
 
 class Signup extends Controller
 {
-    public function newAction()
+    public function indexAction(): void
     {
-        View::render('Signup/new.php');
+        View::render('Signup/index.php');
     }
 
-    public function createAction()
+    public function validateAction(): void
     {
         $user = new User($_POST);
 
         if (true === $user->save()) {
             $this->redirect('/signup/success');
         } else {
-            View::render('Signup/new.php', ['user' => $user]);
+            View::render('Signup/index.php', ['user' => $user]);
         }
     }
 
-    public function successAction()
+    public function successAction(): void
     {
         View::render('Signup/success.php');
     }

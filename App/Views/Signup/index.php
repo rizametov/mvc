@@ -7,8 +7,6 @@
     <title>Sign up</title>
 </head>
 <body>
-    <a href="/">Home</a>
-
     <?php if (isset($user)): ?>
         <p>Errors:</p>
         <ul>
@@ -20,7 +18,7 @@
 
     <h1>Sing up</h1>
 
-    <form action="/signup/create" method="post">
+    <form method="post" action="/signup/validate">
 
         <label for="inputName">Name</label>
         <input id="inputName" name="name" placeholder="Name" type="text" autofocus 
