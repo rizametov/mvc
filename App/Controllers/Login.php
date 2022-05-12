@@ -6,6 +6,7 @@ use Core\View;
 use Core\Controller;
 use App\Models\User;
 use App\Auth;
+use App\Flash;
 
 class Login extends Controller
 {
@@ -22,15 +23,28 @@ class Login extends Controller
 
             Auth::login($user);
 
-            $this->redirect(Auth::getReturnToPage());
-        }
+            Flash::add('Login successful!');
 
-        View::render('Login/index.php', ['email' => $_POST['email']]);
+            $this->redirect(Auth::getReturnToPage());
+
+        } else {
+
+            Flash::add('Login unsuccessful, try again');
+
+            View::render('Login/index.php', ['email' => $_POST['email']]);
+        }
     }
 
     public function logoutAction(): void
     {
         Auth::logout();
+
+        $this->redirect('/login/show-logout-message');
+    }
+
+    public function showLogoutMessageAction(): void
+    {
+        Flash::add('Logout successful');
     
         $this->redirect('/');
     }

@@ -3,6 +3,7 @@
 namespace Core;
 
 use App\Auth;
+use App\Flash;
 
 abstract class Controller
 {
@@ -32,6 +33,8 @@ abstract class Controller
     protected function requireLogin(): void
     {
         if (null === Auth::getUser()) {
+
+            Flash::add('Please login to access the page');
 
             Auth::rememberRequestedPage();
 
