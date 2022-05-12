@@ -7,6 +7,8 @@
     <title>Success</title>
 </head>
 <body>
+    <div><a href="/">Home</a></div>
+    <hr>
     <h2>User was successfully created</h2>
 </body>
 </html>

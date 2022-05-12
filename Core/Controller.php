@@ -2,6 +2,8 @@
 
 namespace Core;
 
+use App\Auth;
+
 abstract class Controller
 {
     public function __construct(protected array $routeParams) {}
@@ -25,6 +27,16 @@ abstract class Controller
         header('Location: http://' . $_SERVER['HTTP_HOST'] . $url, true, 303);
         
         exit;
+    }
+
+    protected function requireLogin(): void
+    {
+        if (null === Auth::getUser()) {
+
+            Auth::rememberRequestedPage();
+
+            $this->redirect('/');
+        }
     }
 
     protected function before() {}

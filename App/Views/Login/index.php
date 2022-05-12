@@ -7,7 +7,9 @@
     <title>Log in</title>
 </head>
 <body>
-<h1>Log in</h1>
+    <div><a href="/">Home</a></div>
+    <hr>
+    <h1>Log in</h1>
 
     <form method="post" action="/login/validate">
 

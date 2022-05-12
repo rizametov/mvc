@@ -4,12 +4,12 @@ namespace App\Controllers;
 
 use Core\View;
 use Core\Controller;
-use App\Auth;
+use App\Models\Post;
 
-class Home extends Controller
+class Posts extends Controller
 {
     public function indexAction(): void
     {
-        View::render('Home/index.php');
+        View::render('Post/index.php', ['posts' => Post::all()]);
     }
 }

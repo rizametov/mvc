@@ -3,13 +3,13 @@
 namespace App\Controllers;
 
 use Core\View;
-use Core\Controller;
-use App\Auth;
+use App\Models\Book;
 
-class Home extends Controller
+class Books extends Authenticated
 {
     public function indexAction(): void
     {
-        View::render('Home/index.php');
+        View::render('Book/index.php', ['books' => Book::all()]);
     }
+
 }

@@ -8,7 +8,7 @@ class View
     {
         extract($params, EXTR_SKIP);
 
-        $file = "../App/Views/$view";
+        $file = dirname(__DIR__) . "/App/Views/$view";
 
         if (is_readable($file)) {
             require $file;

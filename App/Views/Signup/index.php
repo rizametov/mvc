@@ -7,6 +7,9 @@
     <title>Sign up</title>
 </head>
 <body>
+    <div><a href="/">Home</a></div>
+    <hr>
+    
     <?php if (isset($user)): ?>
         <p>Errors:</p>
         <ul>

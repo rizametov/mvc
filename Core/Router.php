@@ -4,6 +4,8 @@ namespace Core;
 
 class Router
 {
+    public static string $requestedPath;
+
     private array $routes = [];
 
     private array $params = [];
@@ -68,6 +70,7 @@ class Router
                     }
                 }
                 $this->params = $params;
+                self::$requestedPath = $path;
 
                 return true;
             }

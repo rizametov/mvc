@@ -1,3 +1,8 @@
+<?php 
+
+use App\Auth;
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,9 +13,13 @@
 </head>
 <body>
 
-<div><a href="/signup/index">Sign Up</a></div>
-<hr>
-<div><a href="/login/index">Log In</a></div>
+<?php if (null !== ($user = Auth::getUser())): ?>
+    <div>Hello <?php echo $user->name; ?></div>
+    <hr>
+    <div><a href="/login/logout">Logout</a></div>
+<?php else: ?>
+    <div><a href="/signup/index">Sign Up</a> or <a href="/login/index">Log In</a></div>
+<?php endif; ?>
 
 <hr>
 

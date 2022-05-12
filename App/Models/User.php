@@ -92,7 +92,24 @@ class User extends Model
         return false !== static::getByEmail($email);
     }
 
-    public static function getByEmail(string $email): User|bool
+    public static function getById(int $id): self|bool
+    {
+        $sql = 'SELECT * FROM users WHERE id = :id';
+
+        $db = static::getDB();
+
+        $stmt = $db->prepare($sql);
+
+        $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+
+        $stmt->setFetchMode(PDO::FETCH_CLASS, get_called_class());
+
+        $stmt->execute();
+
+        return $stmt->fetch();
+    }
+
+    public static function getByEmail(string $email): self|bool
     {
         $sql = 'SELECT * FROM users WHERE email = :email';
 
@@ -109,7 +126,7 @@ class User extends Model
         return $stmt->fetch();
     }
 
-    public static function authenticate(string $email, string $password): User|bool
+    public static function authenticate(string $email, string $password): self|bool
     {
         $user = static::getByEmail($email);
 
