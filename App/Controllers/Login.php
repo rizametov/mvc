@@ -29,7 +29,7 @@ class Login extends Controller
 
         } else {
 
-            Flash::add('Login unsuccessful, try again');
+            Flash::add('Login unsuccessful, try again', Flash::WARNING);
 
             View::render('Login/index.php', ['email' => $_POST['email']]);
         }

@@ -5,6 +5,7 @@ namespace App\Controllers;
 use Core\View;
 use Core\Controller;
 use App\Models\User;
+use App\Flash;
 
 class Signup extends Controller
 {
@@ -18,8 +19,10 @@ class Signup extends Controller
         $user = new User($_POST);
 
         if (true === $user->save()) {
+            Flash::add('Successful sign up!');
             $this->redirect('/signup/success');
         } else {
+            Flash::add('There are some errors, try again', Flash::WARNING);
             View::render('Signup/index.php', ['user' => $user]);
         }
     }

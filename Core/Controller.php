@@ -34,7 +34,7 @@ abstract class Controller
     {
         if (null === Auth::getUser()) {
 
-            Flash::add('Please login to access the page');
+            Flash::add('Please login to access the page', Flash::DANGER);
 
             Auth::rememberRequestedPage();
 

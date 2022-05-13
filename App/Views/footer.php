@@ -1,4 +1,3 @@
-<script>console.log('test message')</script>
-
+<script src="/js/main.js"></script>
 </body>
 </html>
