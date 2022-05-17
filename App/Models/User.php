@@ -4,6 +4,7 @@ namespace App\Models;
 
 use \PDO;
 use Core\Model;
+use App\Token;
 
 class User extends Model
 {
@@ -137,5 +138,27 @@ class User extends Model
         }
 
         return false;
-    } 
+    }
+
+    public function rememberLogin(): bool
+    {
+        $token = new Token();
+
+        $this->token = $token->getToken();
+        $this->tokenHash = $token->getHash();
+
+        $this->expiresAt = time() + 60 * 60 * 24 * 30;
+
+        $sql = 'INSERT INTO remembered_logins (token_hash, user_id, expires_at)
+                VALUES (:token_hash, :user_id, :expires_at)';
+
+        $db = static::getDB();
+        $stmt = $db->prepare($sql);
+
+        $stmt->bindValue(':token_hash', $this->tokenHash, PDO::PARAM_STR);
+        $stmt->bindValue(':user_id', $this->id, PDO::PARAM_INT);
+        $stmt->bindValue(':expires_at', date('Y-m-d H:i:s', $this->expiresAt), PDO::PARAM_STR);
+
+        return $stmt->execute();
+    }
 }

@@ -19,9 +19,11 @@ class Login extends Controller
     {
         $user = User::authenticate($_POST['email'], $_POST['password']);
 
+        $rememberMe = isset($_POST['rememberMe']);
+
         if (false !== $user) {
 
-            Auth::login($user);
+            Auth::login($user, $rememberMe);
 
             Flash::add('Login successful!');
 
@@ -31,7 +33,7 @@ class Login extends Controller
 
             Flash::add('Login unsuccessful, try again', Flash::WARNING);
 
-            View::render('Login/index.php', ['email' => $_POST['email']]);
+            View::render('Login/index.php', ['email' => $_POST['email'], 'rememberMe' => $rememberMe]);
         }
     }
 
