@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use Core\View;
 use App\Models\Book;
+use App\Controllers\Authenticated;
 
 class Books extends Authenticated
 {
@@ -11,5 +12,4 @@ class Books extends Authenticated
     {
         View::render('Book/index.php', ['books' => Book::all()]);
     }
-
 }

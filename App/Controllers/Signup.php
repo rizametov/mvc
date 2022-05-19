@@ -16,14 +16,14 @@ class Signup extends Controller
 
     public function validateAction(): void
     {
-        $user = new User($_POST);
+        $newUser = new User($_POST);
 
-        if (true === $user->save()) {
+        if (true === $newUser->save()) {
             Flash::add('Successful sign up!');
             $this->redirect('/signup/success');
         } else {
-            Flash::add('There are some errors, try again', Flash::WARNING);
-            View::render('Signup/index.php', ['user' => $user]);
+            Flash::add('There are some errors, try again', Flash::DANGER);
+            View::render('Signup/index.php', ['newUser' => $newUser]);
         }
     }
 

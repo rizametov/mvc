@@ -19,6 +19,7 @@ class RememberedLogin extends Model
         $db = static::getDB();
 
         $stmt = $db->prepare($sql);
+        
         $stmt->bindValue(':token_hash', $tokenHash, PDO::PARAM_STR);
         $stmt->setFetchMode(PDO::FETCH_CLASS, get_called_class());
 
@@ -42,6 +43,7 @@ class RememberedLogin extends Model
         $sql = 'DELETE FROM remembered_logins WHERE token_hash = :token_hash';
 
         $db = static::getDB();
+
         $stmt = $db->prepare($sql);
 
         $stmt->bindValue(':token_hash', $this->token_hash, PDO::PARAM_STR);

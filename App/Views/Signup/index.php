@@ -1,13 +1,13 @@
 <?php require dirname(__DIR__) . '/header.php'; ?>
 
-    <div><a href="/">Home</a></div>
+    <a href="/login/index">Login</a>
     <hr>
     
-    <?php if (isset($user)): ?>
+    <?php if (isset($newUser)): ?>
         <p>Errors:</p>
         <ul>
-            <?php foreach ($user->getErrors() as $error): ?>
-                <li><?php echo $error; ?></li>
+            <?php foreach ($newUser->getErrors() as $error): ?>
+                <li><?= $error ?></li>
             <?php endforeach; ?>
         </ul>
     <?php endif; ?>
@@ -18,12 +18,12 @@
 
         <label for="inputName">Name</label>
         <input id="inputName" name="name" placeholder="Name" type="text" autofocus 
-            value="<?php echo isset($user) ? $user->name : ''; ?>"  required />
+            value="<?= isset($newUser) ? $newUser->name : '' ?>"  required />
         <hr>
 
         <label for="inputEmail">Email</label>
         <input id="inputEmail" name="email" placeholder="Email" type="email" autofocus 
-            value="<?php echo isset($user) ? $user->email : ''; ?>" required />
+            value="<?= isset($newUser) ? $newUser->email : '' ?>" required />
         <hr>
 
         <label for="inputPassword">Password</label>

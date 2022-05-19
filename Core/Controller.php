@@ -25,7 +25,11 @@ abstract class Controller
 
     protected function redirect(string $url): void
     {
-        header('Location: http://' . $_SERVER['HTTP_HOST'] . $url, true, 303);
+        header(
+            'Location: ' . $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'] . $url, 
+            true, 
+            303
+        );
         
         exit;
     }
@@ -38,7 +42,7 @@ abstract class Controller
 
             Auth::rememberRequestedPage();
 
-            $this->redirect('/');
+            $this->redirect('/login/index');
         }
     }
 

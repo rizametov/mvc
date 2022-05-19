@@ -1,6 +1,7 @@
 <?php require dirname(__DIR__) . '/header.php'; ?>
 
-    <div><a href="/">Home</a></div>
+    <a href="/signup/index">Signup</a>
+
     <hr>
     <h1>Log in</h1>
 
@@ -19,6 +20,8 @@
         <input type="checkbox" name="rememberMe" 
             <?= true === ($rememberMe ?? false) ? 'checked="checked"' : '' ?>
             /> Remember me
+        <hr>
+        <div><a href="/password/fogot">Fogot password?</a></div>
         <hr>
         
         <button type="submit">Log in</button>

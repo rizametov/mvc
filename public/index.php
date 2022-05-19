@@ -15,5 +15,6 @@ $router = new Core\Router();
 $router->add('', ['controller' => 'Home', 'action' => 'index']);
 $router->add('{controller}/{action}');
 $router->add('{controller}/{action}/{\d+}');
+$router->add('password/reset/{[\da-f]+}', ['controller' => 'Password', 'action' => 'reset']);
 
 $router->dispatch($path);

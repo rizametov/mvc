@@ -27,6 +27,7 @@ class Router
                 '/\//' => fn ($matches) => "\/",
                 '/\{([a-z-]+)\}/' => fn ($matches) => "(?P<$matches[1]>[a-z-]+)",
                 '/\{(\\\d\+)\}$/' => fn ($matches) => "(?P<id>$matches[1])",
+                '/\{(\[\\\da-f\]\+)\}$/' => fn ($matches) => "(?P<token>$matches[1])"
             ],
             $route
         );

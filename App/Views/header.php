@@ -16,20 +16,13 @@ use App\Auth;
 <body>
 
 <?php foreach (Flash::get() as $item): ?>
-    <div class="alert alert-<?= $item['type']?>"><?= $item['message'] ?></div>
+    <div class="alert alert-<?= $item['type'] ?>"><?= $item['message'] ?></div>
 <?php endforeach; ?>
 
-<?php if (null !== ($user = Auth::getUser())): ?>
-    <div>Hello <?php echo $user->name; ?></div>
-    <hr>
-    <div><a href="/login/logout">Logout</a></div>
-    <hr>
-    <div><a href="/books/index">Books</a></div>
-    <hr>
-    <div><a href="/posts/index">Posts</a></div>
-<?php else: ?>
-    <div><a href="/signup/index">Sign Up</a> or <a href="/login/index">Log In</a></div>
-    <hr>
-    <div><a href="/posts/index">Posts</a></div>
+<a href="/">Home</a>&nbsp
+<a href="/posts/index">Posts</a>&nbsp
+<a href="/books/index">Books</a>&nbsp
+
+<?php if (null !== Auth::getUser()): ?>
+    <a href="/login/logout">Logout</a>
 <?php endif; ?>
-    
