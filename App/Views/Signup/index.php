@@ -22,17 +22,17 @@
         <hr>
 
         <label for="inputEmail">Email</label>
-        <input id="inputEmail" name="email" placeholder="Email" type="email" autofocus 
+        <input id="inputEmail" name="email" placeholder="Email" type="email" 
             value="<?= isset($newUser) ? $newUser->email : '' ?>" required />
         <hr>
 
         <label for="inputPassword">Password</label>
-        <input id="inputPassword" name="password" placeholder="Password" type="password" autofocus required />
+        <input id="inputPassword" name="password" placeholder="Password" type="password" required />
         <hr>
 
         <label for="inputPasswordConfirmation">Repeat password</label>
         <input id="inputPasswordConfirmation" name="passwordConfirmation" 
-            placeholder="Repeat Password" type="password" autofocus required />
+            placeholder="Repeat Password" type="password" required />
         <hr>
         
         <button type="submit">Sign Up</button>

@@ -14,7 +14,7 @@
 
         <label for="inputPassword">Password</label>
         <input id="inputPassword" name="password" placeholder="Password" 
-            type="password" autofocus required />
+            type="password" equired />
         <hr>
 
         <input type="checkbox" name="rememberMe" 
