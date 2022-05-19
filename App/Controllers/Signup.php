@@ -19,16 +19,26 @@ class Signup extends Controller
         $newUser = new User($_POST);
 
         if (true === $newUser->save()) {
-            Flash::add('Successful sign up!');
-            $this->redirect('/signup/success');
+            $newUser->sendActivationEmail();
+
+            $this->redirect('/signup/created-success');
         } else {
             Flash::add('There are some errors, try again', Flash::DANGER);
             View::render('Signup/index.php', ['newUser' => $newUser]);
         }
     }
 
-    public function successAction(): void
+    public function createdSuccessAction(): void
     {
-        View::render('Signup/success.php');
+        View::render('Signup/created-success.php');
+    }
+
+    public function activateAction(): void
+    {
+        if (true === User::activateAccount($this->routeParams['token'])) {
+            View::render('Signup/activation-success.php');
+        } else {
+            View::render('404.php');
+        }
     }
 }

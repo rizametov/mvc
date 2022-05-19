@@ -1,4 +1,5 @@
 App/Config.php
-public/token.html
+public/reset-password.html
+public/account-activate.html
 logs
 vendor

@@ -21,7 +21,7 @@ class Login extends Controller
 
         $rememberMe = isset($_POST['rememberMe']);
 
-        if (false !== $user) {
+        if (false !== $user && 1 === $user->is_active) {
 
             Auth::login($user, $rememberMe);
 

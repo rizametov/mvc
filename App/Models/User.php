@@ -40,8 +40,13 @@ class User extends Model
         if (empty($this->errors)) {
             $passwordHash = password_hash($this->password, PASSWORD_DEFAULT);
 
-            $sql = 'INSERT INTO users (name, email, password_hash)
-                    VALUES (:name, :email, :password_hash)';
+            $token = new Token();
+            $activationHash = $token->getHash();
+
+            $this->activation_token = $token->getToken();
+
+            $sql = 'INSERT INTO users (name, email, password_hash, activation_hash)
+                    VALUES (:name, :email, :password_hash, :activation_hash)';
 
             $db = static::getDB();
 
@@ -50,6 +55,7 @@ class User extends Model
             $stmt->bindValue(':name', $this->name, PDO::PARAM_STR);
             $stmt->bindValue(':email', $this->email, PDO::PARAM_STR);
             $stmt->bindValue(':password_hash', $passwordHash, PDO::PARAM_STR);
+            $stmt->bindValue(':activation_hash', $activationHash, PDO::PARAM_STR);
 
             return $stmt->execute();
         }
@@ -190,7 +196,7 @@ class User extends Model
 
         $user = $stmt->fetch();
 
-        return strtotime($user->password_reset_expires_at) > time() ? $user : false;    
+        return strtotime($user->password_reset_expires_at) > time() ? $user : false;   
     }
 
     public function resetPassword(string $password, string $passwordConfirmation): bool
@@ -266,7 +272,7 @@ class User extends Model
 
         $html = 'Click the <a href="' . $url .'">here</a> to reset your password.';
 
-        file_put_contents('token.html', $html);
+        file_put_contents('reset-password.html', $html);
 
         (new Mail(new MailService()))->send(
             $this->email,
@@ -274,5 +280,42 @@ class User extends Model
             $text,
             $html
         );
+    }
+
+    public function sendActivationEmail(): void
+    {
+        $url = $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'] . '/signup/activate/' . $this->activation_token;
+
+        $text = 'Click on following url to activate your account: ' . $url;
+
+        $html = 'Click the <a href="' . $url .'">here</a> to activate your account.';
+
+        file_put_contents('account-activate.html', $html);
+
+        (new Mail(new MailService()))->send(
+            $this->email,
+            'Account activation',
+            $text,
+            $html
+        );
+    }
+
+    public static function activateAccount(string $token): bool
+    {
+        $token = new Token($token);
+        $activationHash = $token->getHash();
+
+        $sql = 'UPDATE users
+                SET is_active = 1,
+                    activation_hash = NULL
+                WHERE activation_hash = :activation_hash';
+
+        $db = static::getDB();
+
+        $stmt = $db->prepare($sql);
+
+        $stmt->bindValue(':activation_hash', $activationHash, PDO::PARAM_STR);
+
+        return $stmt->execute();
     }
 }

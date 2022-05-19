@@ -31,7 +31,5 @@ class Mail
                 'html' => $html,
             ]
         );
-
-        echo 'Done!';
     }
 }
