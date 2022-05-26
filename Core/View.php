@@ -4,16 +4,18 @@ namespace Core;
 
 class View
 {
-    public static function render(string $view, array $params = []): void
+    public static function render(string $view, array $params = [], string $layout = 'main'): void
     {
-        extract($params, EXTR_SKIP);
+        $viewFile = dirname(__DIR__) . "/App/Views/$view.php";
 
-        $file = dirname(__DIR__) . "/App/Views/$view";
-
-        if (is_readable($file)) {
-            require $file;
+        if (is_readable($viewFile)) {
+            extract($params, EXTR_SKIP);
+            ob_start();
+            require $viewFile;
+            $content = ob_get_clean();
+            require dirname(__DIR__) . "/App/Views/layout/$layout.php";
         } else {
-            throw new \Exception("$file not found");
+            throw new \Exception("Page not found");
         }
     }
 }

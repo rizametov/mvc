@@ -1,9 +1,3 @@
-<?php
-
-use App\Flash;
-use App\Auth;
-
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,11 +5,15 @@ use App\Auth;
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/style.css">
-    <title>php-mvc</title>
+    <title><?= $title ?? 'Home' ?></title>
 </head>
 <body>
 
-<?php foreach (Flash::get() as $item): ?>
+<?php if (null !== ($user = \App\Auth::getUser())): ?>
+    Welcome <?= $user->name ?>
+<?php endif; ?>
+
+<?php foreach (\App\Flash::get() as $item): ?>
     <div class="alert alert-<?= $item['type'] ?>"><?= $item['message'] ?></div>
 <?php endforeach; ?>
 
@@ -23,6 +21,12 @@ use App\Auth;
 <a href="/posts/index">Posts</a>&nbsp
 <a href="/books/index">Books</a>&nbsp
 
-<?php if (null !== Auth::getUser()): ?>
-    <a href="/login/logout">Logout</a>
-<?php endif; ?>
+<a href="/login/logout">Logout</a>
+
+<hr>
+
+<?= $content ?>
+
+<script src="/js/main.js"></script>
+</body>
+</html>

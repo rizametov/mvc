@@ -1,5 +1,3 @@
-<?php require dirname(__DIR__) . '/header.php'; ?>
-
     <a href="/login/index">Login</a>
     <hr>
     
@@ -38,5 +36,3 @@
         <button type="submit">Sign Up</button>
 
     </form>
-
-<?php require dirname(__DIR__) . '/footer.php'; ?>

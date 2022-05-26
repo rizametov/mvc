@@ -10,6 +10,6 @@ class Home extends Controller
 {
     public function indexAction(): void
     {
-        View::render('Home/index.php');
+        $this->render('Home/index');
     }
 }

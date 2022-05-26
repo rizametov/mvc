@@ -2,11 +2,14 @@
 
 namespace Core;
 
+use Core\View;
 use App\Auth;
 use App\Flash;
 
 abstract class Controller
 {
+    protected string $layout = 'main';
+
     public function __construct(protected array $routeParams) {}
 
     public function __call($method, $params)
@@ -26,7 +29,7 @@ abstract class Controller
     protected function redirect(string $url): void
     {
         header(
-            'Location: ' . $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'] . $url, 
+            'Location: ' . $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'] . $url,
             true, 
             303
         );
@@ -44,6 +47,11 @@ abstract class Controller
 
             $this->redirect('/login/index');
         }
+    }
+
+    protected function render(string $view, array $params = []): void
+    {
+        View::render($view, $params, $this->layout);
     }
 
     protected function before() {}

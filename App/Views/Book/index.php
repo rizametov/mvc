@@ -1,5 +1,3 @@
-<?php require dirname(__DIR__) . '/header.php'; ?>
-
     <h1>Books list</h1>
     <hr>
 
@@ -11,5 +9,3 @@
             </ul>
             <hr>
         <?php endforeach; ?>
-    
-<?php require dirname(__DIR__) . '/footer.php'; ?>

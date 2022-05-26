@@ -6,6 +6,8 @@ use Core\Controller;
 
 abstract class Authenticated extends Controller
 {
+    protected string $layout = 'authenticated';
+
     protected function before(): void
     {
         $this->requireLogin();

@@ -2,7 +2,6 @@
 
 namespace App\Controllers;
 
-use Core\View;
 use Core\Controller;
 use App\Models\User;
 use App\Auth;
@@ -12,16 +11,16 @@ class Password extends Controller
 {
     public function fogotAction(): void
     {
-        View::render('Password/fogot.php');
+        $this->render('Password/fogot', ['title' => 'Password Fogot']);
     }
 
     public function requestResetAction(): void
     {   
         if (false !== $user = User::getByEmail($_POST['email'])) {
             $user->sendPasswordReset();
-            View::render('Password/reset-requested.php');
+            $this->render('Password/reset-requested', ['title' => 'Password Reset']);
         } else {          
-            View::render('404.php');
+            $this->render('404');
         }
     }
 
@@ -30,7 +29,7 @@ class Password extends Controller
         $token = $this->routeParams['token'];
         $user = $this->getUserByToken($token);
 
-        View::render('Password/reset.php', ['token' => $token]);
+        $this->render('Password/reset', ['title' => 'Password Reset', 'token' => $token]);
     }
 
     public function resetPasswordAction(): void
@@ -44,7 +43,11 @@ class Password extends Controller
             $this->redirect('/login/index');
         } else {
             Flash::add('There are some errors', Flash::WARNING);
-            View::render('Password/reset.php', ['token' => $token, 'errors' => $user->getErrors()]);
+            $this->render('Password/reset', [
+                'title' => 'Password Reset',
+                'token' => $token, 
+                'errors' => $user->getErrors()
+            ]);
         } 
     }
 
@@ -53,7 +56,7 @@ class Password extends Controller
         if (false !== $user = User::getByToken($token)) {
             return $user;
         } else {
-            View::render('Password/token-expired.php');
+            $this->render('Password/token-expired', ['title' => 'Password Expired']);
             exit;
         }
     }

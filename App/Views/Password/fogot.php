@@ -1,9 +1,3 @@
-<?php 
-
-require dirname(__DIR__) . '/header.php';
-
-?>
-
 <h1>Request password reset</h1>
 <hr>
 
@@ -17,5 +11,3 @@ require dirname(__DIR__) . '/header.php';
     </div>
 
 </form>
-
-<?php require dirname(__DIR__) . '/footer.php'; ?>

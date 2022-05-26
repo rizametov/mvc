@@ -40,7 +40,7 @@ class Error
 
             error_log($message);
 
-            View::render("$code.php");
+            View::render("$code");
         }
     }
 }

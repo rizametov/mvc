@@ -1,6 +1,4 @@
-<?php require dirname(__DIR__) . '/header.php'; ?>
-    
-    <?php if (! empty($errors)): ?>
+    <?php if (isset($errors)): ?>
         <p>Errors:</p>
         <ul>
             <?php foreach ($errors as $error): ?>
@@ -19,7 +17,7 @@
         <hr>
         <label for="inputPasswordConfirmation">Repeat new password</label>
         <input id="inputPasswordConfirmation" name="passwordConfirmation" 
-            placeholder="Repeat Password" type="password" autofocus required />
+            placeholder="Repeat Password" type="password" required />
         <hr>
 
         <input type="hidden" name="token" value="<?= $token ?>">
@@ -27,5 +25,3 @@
         <button type="submit">Send</button>
 
     </form>
-
-<?php require dirname(__DIR__) . '/footer.php'; ?>

@@ -2,7 +2,6 @@
 
 namespace App\Controllers;
 
-use Core\View;
 use Core\Controller;
 use App\Models\User;
 use App\Auth;
@@ -12,7 +11,7 @@ class Login extends Controller
 {
     public function indexAction(): void
     {
-        View::render('Login/index.php');
+        $this->render('Login/index', ['title' => 'Login']);
     }
 
     public function validateAction(): void
@@ -33,7 +32,11 @@ class Login extends Controller
 
             Flash::add('Login unsuccessful, try again', Flash::WARNING);
 
-            View::render('Login/index.php', ['email' => $_POST['email'], 'rememberMe' => $rememberMe]);
+            $this->render('Login/index', [
+                'title' => 'Login', 
+                'email' => $_POST['email'], 
+                'rememberMe' => $rememberMe]
+            );
         }
     }
 
